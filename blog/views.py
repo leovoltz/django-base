@@ -2,7 +2,7 @@ from typing import Any
 
 from django.shortcuts import render
 from blog.data import posts
-from django.http import HttpRequest
+from django.http import Http404, HttpRequest
 
 
 def blog(request):
@@ -28,7 +28,7 @@ def post(request: HttpRequest, post_id: int):
             break
 
     if found_post is None:
-        raise Exception('Post não existe.')
+        raise Http404('Post não existe.')
 
     context = {
         'post': found_post,
